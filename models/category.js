@@ -25,4 +25,4 @@ const budgetSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Category", budgetSchema);
+module.exports = mongoose.model("Slug", budgetSchema);
