@@ -4,8 +4,9 @@ const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.create = async (req, res) => {
     let size = Object.keys(req.body).length;
-    if (size > 3) {
-        Target.find({ month: req.body.month, year: req.body.year })
+    const { month, year, user_id} = req.body;
+    if (size > 3 && month && year && user_id) {
+        Target.find({ month, year, user_id })
             .exec((err, budgets) => {
                 if (budgets?.length < 1) {
                     const budget = new Target(req.body);
@@ -49,6 +50,20 @@ exports.list = (req, res) => {
         });
 };
 
+exports.getCurrentMonthTargetByUser = (req, res) => {
+    let month = req.params?.month;
+    let year = req.params?.year;
+    let user_id = req.params?.user_id;
+    Target.find({ month, year, user_id })
+        .exec((err, products) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Products not found'
+                });
+            }
+            res.json(products);
+        });
+};
 exports.getCurrentMonthTarget = (req, res) => {
     let month = req.params?.month;
     let year = req.params?.year;
