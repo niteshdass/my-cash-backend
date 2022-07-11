@@ -65,9 +65,9 @@ exports.getCurrentMonthTargetByUser = (req, res) => {
         });
 };
 exports.getCurrentMonthTarget = (req, res) => {
-    let month = req.params?.month;
-    let year = req.params?.year;
-    Target.find({ month, year })
+    let user_id = req.params?.user_id;
+    if(user_id) {
+        Target.find({ user_id })
         .exec((err, products) => {
             if (err) {
                 return res.status(400).json({
@@ -76,6 +76,11 @@ exports.getCurrentMonthTarget = (req, res) => {
             }
             res.json(products);
         });
+    } else {
+        return res.status(400).json({
+            error: 'Products not found'
+        });
+    }
 };
 
 exports.remove = (req, res) => {

@@ -7,7 +7,7 @@ const {
 
 router.post("/", create);
 router.get("/", list);
-router.get("/:month/:year", getCurrentMonthTarget);
+router.get("/:user_id", getCurrentMonthTarget);
 router.get("/:user_id/:month/:year", getCurrentMonthTargetByUser);
 router.delete("/:removeId", remove);
 
