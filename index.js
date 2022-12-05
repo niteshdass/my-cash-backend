@@ -48,6 +48,9 @@ app.use(cors());
 
 // routes middleware
 app.use('/api', authRoutes); 
+app.get('/', (req, res) => {
+   res.send('Hello World!')
+})
 //app.use('/api', userRoutes);
 app.use('/target', postRoutes);
 app.use('/budget', budgetRoute);
